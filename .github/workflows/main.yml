@@ -56,5 +56,7 @@ jobs:
                 username: ${{ secrets.USERNAME }}
                 key: ${{ secrets.SSH_KEY }}
                 script: |
-                  pwd
-                  ls -lah
+                  echo ${{ secrets.CICD_TOKEN}} | docker login ghcr.io -u thomassanna --password-stdin
+                  docker pull $URL/thomassanna/$IMAGE_NAME:latest
+                  docker run -d -p 3000:3000 --name $IMAGE_NAME $URL/thomassanna/$IMAGE_NAME:latest
+                  curl localhost:3000
