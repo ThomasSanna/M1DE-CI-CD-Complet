@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  IMAGE_NAME: ghcr.io/${{ github.repository }}:app
+  IMAGE_NAME: ghcr.io/ci-cd-complet:app
 
 jobs:
     test:
@@ -28,5 +28,9 @@ jobs:
             
             - name: build image
               run: docker build -t $IMAGE_NAME .
-            - name: push image
-              run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u
+            - name: run image
+              run: docker run -d -p 3000:3000 $IMAGE_NAME
+            #- name: push image
+            #  run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u
+            - name: test image
+              run: ls -lah
