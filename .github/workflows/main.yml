@@ -31,9 +31,9 @@ jobs:
             - name: run image
               run: docker run -d -p 3000:3000 $IMAGE_NAME
             - name: tagger en version courante
-              run: docker tag $IMAGE_NAME:1.0 $URL/thomassanna/$IMAGE_NAME:1.0
+              run: docker tag $IMAGE_NAME $URL/thomassanna/$IMAGE_NAME:1.0
             - name: tagger en version latest
-              run: docker tag $IMAGE_NAME:latest $URL/thomassanna/$IMAGE_NAME:latest
+              run: docker tag $IMAGE_NAME $URL/thomassanna/$IMAGE_NAME:latest
             - name: connexion à ghcr
               uses: docker/login-action@v2
               with:
