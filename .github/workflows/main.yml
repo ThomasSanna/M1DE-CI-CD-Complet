@@ -58,9 +58,9 @@ jobs:
                 script: |
                   IMAGE_NAME="${{ env.IMAGE_NAME }}"
                   IMAGE_URI="${{ env.URL }}/thomassanna/${{ env.IMAGE_NAME }}:latest"
-                  echo "${{ secrets.CICD_TOKEN }}" | docker login "${{ env.URL }}" -u thomassanna --password-stdin
-                  docker pull "$IMAGE_URI"
-                  docker rm -f "$IMAGE_NAME" || true
-                  docker run -d -p 3000:3000 --name "$IMAGE_NAME" "$IMAGE_URI"
+                  echo "${{ secrets.CICD_TOKEN }}" | sudo docker login "${{ env.URL }}" -u thomassanna --password-stdin
+                  sudo docker pull "$IMAGE_URI"
+                  sudo docker rm -f "$IMAGE_NAME" || true
+                  sudo docker run -d -p 3000:3000 --name "$IMAGE_NAME" "$IMAGE_URI"
                   sleep 5
                   curl --fail http://localhost:3000
